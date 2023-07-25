@@ -1,17 +1,23 @@
 
+
+import "../App.css";
 import { useEffect, useState } from "react";
 import {containsUpperCase, isPasswordLengthValid, validateEmail,isInputNotEmpty} from "./validationServices";
 import {Error} from './errorcomponent.js';
+import { ModalWin } from "./modal";
+//import { Modal } from "./modal";
 export function SimpleForm(){
      const [enteredName, setEnteredName]= useState('');
      const [touched, setTouched]= useState('');
      const [email, setEmail]= useState('');
      const [password, setpwdVal]= useState('');
+     const [showModal, setShowModal]= useState(false);
      const [formValid, setFormValidity] = useState(false);
      const [validity, setValidity]= useState({isnameValid:false,isPwdvalid:false, isemailValid:false});
      const [errorText, setError] =useState({name:'name error', password:'password invalid', email:'emain error'});
      
       const btnClass = formValid?'btn btn-primary':'btn btn-secondary'
+      
  
      useEffect(
         ()=>{
@@ -48,6 +54,9 @@ export function SimpleForm(){
         setError( {...errorText, name:'Enter a name'});
         
 
+     }
+     const onClose=()=>{
+        setShowModal(false);
      }
 
 
@@ -93,9 +102,9 @@ export function SimpleForm(){
       */
      const onFormSubmit=(event)=>{
         event.preventDefault();
+        setShowModal(true);
         console.log(enteredName);
-        console.log(password);
-       
+        console.log(password);     
 
 
         setEnteredName('');
@@ -106,28 +115,30 @@ export function SimpleForm(){
      }
 
      return(
-     <form className="center" onChange={()=>{ console.log("touched"); setTouched(true)}}>
-        <div className="form-control form-group">
+        <>
+        <div className="d-flex justify-content-center mt-5 p18 bg-blue">
+     <form className="center bg-form " onChange={()=>{ console.log("touched"); setTouched(true)}}>
+        <div className="form-control form-group p18 my-2 mx-4">
             <label htmlFor ='name'>
                 Please enter your Name
             </label>
-            <input type="text" id="name" onChange={nameChangeHandler} onBlur={nameValidator}></input>
+            <input className="mx-2" type="text" id="name" onChange={nameChangeHandler} onBlur={nameValidator}></input>
             {(touched && !validity?.isnameValid )?(<Error errortext={errorText.name}></Error>):''
 }
         </div>
-        <div className="form-control">
+        <div className="form-control my-2 mx-4">
             <label htmlFor ='email'>
                 Please enter your Email
             </label>
-            <input type="text" id="email"   onChange={emailChangeHandler} onBlur={emailValidator} ></input>
+            <input className="mx-2" type="text" id="email"   onChange={emailChangeHandler} onBlur={emailValidator} ></input>
             {(touched && !validity?.isemailValid )?(<Error errortext={errorText.email}></Error>):''
 } 
         </div>
-        <div className="form-control">
+        <div className="form-control my-2 mx-4">
             <label htmlFor ='pwd'>
                 Please enter your Password
             </label>
-            <input type="text"  id="email"   onChange={passwordChangeHandler}  onBlur={pwdValidator}></input>
+            <input className="mx-2" type="text"  id="email"   onChange={passwordChangeHandler}  onBlur={pwdValidator}></input>
            
             {(touched && validity?.isPwdvalid===false )?(<Error errortext={errorText.password}></Error>):''
 } 
@@ -139,5 +150,8 @@ export function SimpleForm(){
 
         </div>
      </form>
+     </div>
+     <ModalWin Show={showModal} showText="Registration Is Success !!!" onClose={onClose}></ModalWin>
+     </>
      )
 }

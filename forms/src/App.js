@@ -1,6 +1,7 @@
 
 import './App.css';
 import './custom.css';
+import { ModalWin } from './forms/modal';
 
 
 import { SimpleForm } from './forms/simpleform.js';

@@ -1,0 +1,23 @@
+@import '../node_modules/bootstrap/dist/css/bootstrap.css';
+
+.p12{
+font-size:12px;
+}
+.p18{
+    font-size:18px;
+    }
+.bg-blue{
+    background-color: rgb(221, 221, 238);
+    width:50%;
+    margin-left:25%;
+    height:25%;
+    
+
+}
+.bg-form{
+    width:50%;
+    height:25%;
+}
+.bg-form input{
+    margin-left:5px;
+}
