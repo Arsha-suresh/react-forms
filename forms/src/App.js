@@ -1,14 +1,12 @@
 
+
 import './App.css';
 import './custom.css';
-import { ModalWin } from './forms/modal';
-
-
-import { SimpleForm } from './forms/simpleform.js';
+import { Layout } from './layout';
 
 function App() {
   return (
-    <SimpleForm></SimpleForm>
+    <Layout></Layout>
   );
 }
 
